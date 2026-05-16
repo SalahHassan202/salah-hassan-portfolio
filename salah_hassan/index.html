@@ -1311,6 +1311,11 @@ function tick() {
 }
 setInterval(tick, 1000);
 tick();
+  const prog = document.getElementById('progress');
+window.addEventListener('scroll', () => {
+  const h = document.documentElement.scrollHeight - innerHeight;
+  prog.style.width = (scrollY / h * 100) + '%';
+});
 </script>
 <!-- ═══════════════ FOOTER ═══════════════ -->
 <footer>
