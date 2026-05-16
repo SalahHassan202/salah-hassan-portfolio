@@ -1316,6 +1316,12 @@ window.addEventListener('scroll', () => {
   const h = document.documentElement.scrollHeight - innerHeight;
   prog.style.width = (scrollY / h * 100) + '%';
 });
+
+  const cg = document.getElementById('cg');
+window.addEventListener('mousemove', e => {
+  cg.style.left = e.clientX + 'px';
+  cg.style.top = e.clientY + 'px';
+});
 </script>
 <!-- ═══════════════ FOOTER ═══════════════ -->
 <footer>
