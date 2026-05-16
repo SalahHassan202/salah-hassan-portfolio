@@ -25,6 +25,7 @@
       --border: rgba(0,212,255,0.18);
       --border2: rgba(255,255,255,0.07);
       --shadow: 0 24px 64px rgba(0,0,0,.55);
+      --glow: 0 0 50px rgba(0,212,255,0.13);
     }
     [data-theme="light"] {
       --bg: #f4f7fb;
@@ -39,6 +40,7 @@
       --border: rgba(2,100,200,0.18);
       --border2: rgba(0,0,0,0.07);
       --shadow: 0 24px 64px rgba(0,0,0,.08);
+      --glow: 0 0 40px rgba(2,132,199,0.1);
     }
 
     /* Base */
@@ -78,7 +80,30 @@
       opacity: 0.5;
     }
 
-    /* ========== NAVBAR ========== */
+    /* Progress Bar */
+    #progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 0%;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      z-index: 9999;
+    }
+
+    /* Cursor Glow */
+    #cg {
+      position: fixed;
+      width: 420px;
+      height: 420px;
+      background: radial-gradient(circle, rgba(0,212,255,0.12) 0%, transparent 70%);
+      pointer-events: none;
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 9998;
+    }
+
+    /* Navbar */
     nav {
       position: fixed;
       top: 0;
@@ -153,8 +178,6 @@
       align-items: center;
       gap: 10px;
     }
-
-    /* Theme Toggle */
     .theme-btn {
       width: 52px;
       height: 28px;
@@ -178,8 +201,6 @@
       content: '☀️';
       transform: translateX(24px);
     }
-
-    /* WhatsApp Button */
     .nav-wa {
       display: flex;
       align-items: center;
@@ -202,8 +223,6 @@
       width: 15px;
       height: 15px;
     }
-
-    /* Hamburger (mobile) */
     .ham {
       display: none;
       flex-direction: column;
@@ -224,19 +243,284 @@
       border-radius: 2px;
       transition: all .3s;
     }
+
+    /* ========== HERO SECTION ========== */
+    #hero {
+      position: relative;
+      z-index: 1;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 110px 60px 80px;
+      max-width: 1320px;
+      margin: 0 auto;
+    }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr 360px;
+      gap: 72px;
+      align-items: center;
+      width: 100%;
+    }
+
+    /* Availability Pill */
+    .avail-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid rgba(0,255,148,0.35);
+      background: rgba(0,255,148,0.07);
+      padding: 6px 16px;
+      border-radius: 100px;
+      margin-bottom: 28px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--accent2);
+    }
+    .avail-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--accent2);
+      animation: pg 2s ease-in-out infinite;
+    }
+    @keyframes pg {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(0,255,148,.6); }
+      50% { box-shadow: 0 0 0 6px rgba(0,255,148,0); }
+    }
+
+    /* Hero Name & Role */
+    .hero-name {
+      font-size: clamp(44px, 6vw, 80px);
+      font-weight: 700;
+      line-height: 1.0;
+      letter-spacing: -2px;
+      margin-bottom: 6px;
+    }
+    .hero-role {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 16px;
+      color: var(--text2);
+      margin-bottom: 22px;
+      min-height: 28px;
+    }
+    #tw {
+      color: var(--accent);
+    }
+    .cur {
+      animation: blink .85s step-end infinite;
+      color: var(--accent);
+    }
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+
+    /* Hero Description */
+    .hero-desc {
+      font-size: 16px;
+      color: var(--text2);
+      line-height: 1.8;
+      max-width: 540px;
+      margin-bottom: 36px;
+    }
+
+    /* Hero Stats */
+    .hero-stats {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      margin-bottom: 36px;
+      background: var(--surface);
+      border: 1.5px solid var(--border);
+      border-radius: 24px;
+      width: fit-content;
+      max-width: 100%;
+      overflow: hidden;
+      backdrop-filter: blur(12px);
+      transition: border-color var(--transition);
+    }
+    .hero-stats:hover {
+      border-color: var(--accent);
+    }
+    .stat {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 18px 24px;
+      gap: 4px;
+      transition: background .2s;
+    }
+    .stat:hover {
+      background: rgba(0,212,255,0.06);
+    }
+    .stat-n {
+      font-size: 30px;
+      font-weight: 700;
+      font-family: 'JetBrains Mono', monospace;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      line-height: 1;
+    }
+    .stat-plus {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--accent2);
+      display: inline;
+    }
+    .stat-l {
+      font-size: 9px;
+      color: var(--text3);
+      letter-spacing: 1.5px;
+      font-weight: 700;
+    }
+    .stat-div {
+      width: 1px;
+      height: 52px;
+      background: var(--border2);
+      flex-shrink: 0;
+    }
+
+    /* CTA Buttons */
+    .hero-ctas {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .cta-p, .cta-s {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      font-weight: 700;
+      padding: 13px 26px;
+      border-radius: 12px;
+      text-decoration: none;
+      transition: all .3s;
+    }
+    .cta-p {
+      background: var(--accent);
+      color: #000;
+    }
+    .cta-p:hover {
+      background: var(--accent2);
+      transform: translateY(-3px);
+    }
+    .cta-s {
+      border: 1.5px solid var(--border);
+      color: var(--text);
+      background: var(--surface);
+    }
+    .cta-s:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      transform: translateY(-3px);
+    }
+
+    /* Photo Section */
+    .photo-col {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+    }
+    .photo-wrap {
+      position: relative;
+    }
+    .photo-ring {
+      width: 300px;
+      height: 360px;
+      border-radius: 28px;
+      overflow: hidden;
+      border: 2px solid var(--border);
+      box-shadow: var(--shadow);
+      animation: float 4s ease-in-out infinite;
+    }
+    @keyframes float {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-14px); }
+      100% { transform: translateY(0); }
+    }
+    .photo-ring img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top;
+      display: block;
+      transition: transform .4s;
+    }
+    .photo-ring:hover img {
+      transform: scale(1.05);
+    }
+    .photo-badge {
+      position: absolute;
+      bottom: -16px;
+      left: -24px;
+      background: var(--bg3);
+      border: 1.5px solid var(--border);
+      border-radius: 16px;
+      padding: 12px 18px;
+      box-shadow: var(--shadow);
+      min-width: 164px;
+    }
+    .pb-title {
+      font-size: 13px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .pb-img {
+      width: 18px;
+      height: 18px;
+      object-fit: contain;
+    }
+    .pb-sub {
+      font-size: 11px;
+      color: var(--text2);
+      margin-top: 3px;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    @media (max-width: 900px) {
+      .hero-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+      .photo-col {
+        order: -1;
+        justify-content: center;
+      }
+      #hero {
+        text-align: center;
+        padding: 100px 20px 60px;
+      }
+      .hero-desc {
+        max-width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .hero-ctas {
+        justify-content: center;
+      }
+      .avail-pill {
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .hero-stats {
+        margin-left: auto;
+        margin-right: auto;
+      }
+    }
   </style>
 </head>
 <body>
 
-<!-- Progress Bar -->
-<div id="progress" style="position:fixed;top:0;left:0;width:0%;height:3px;background:linear-gradient(90deg,var(--accent),var(--accent2));z-index:9999;"></div>
+<div id="progress"></div>
+<div id="cg"></div>
 
-<!-- Cursor Glow -->
-<div id="cg" style="position:fixed;width:420px;height:420px;background:radial-gradient(circle,rgba(0,212,255,0.12) 0%,transparent 70%);pointer-events:none;border-radius:50%;z-index:9998;"></div>
-
-<!-- Navbar -->
 <nav id="mainNav">
-  <a href="#" class="nav-logo">
+  <a href="#hero" class="nav-logo">
     <img src="assets/images/logo/logo.png" alt="logo" onerror="this.style.display='none'">
     Salah Hassan
   </a>
@@ -245,7 +529,7 @@
     <a href="#experience">Experience</a>
     <a href="#projects">Projects</a>
     <a href="#education">Education</a>
-    <a href="#contact">Contact</a>
+    <a href="#contact-full">Contact</a>
   </div>
   <div class="nav-right">
     <button class="theme-btn" id="themeToggle" aria-label="Toggle theme"></button>
@@ -258,7 +542,68 @@
   </div>
 </nav>
 
-<div class="mobile-menu" id="mobileMenu" style="display:none;"></div>
+<div class="mobile-menu" id="mobileMenu"></div>
+
+<!-- HERO SECTION -->
+<div id="hero">
+  <div class="hero-grid">
+    <div>
+      <div class="avail-pill"><span class="avail-dot"></span> Available for Opportunities</div>
+      <h1 class="hero-name"><span id="typedName"></span><span class="cur">|</span></h1>
+      <p class="hero-role"><span id="tw"></span><span class="cur">|</span></p>
+      <p class="hero-desc">Junior Flutter Developer building cross-platform apps with BLoC, Clean Architecture &amp; a relentless focus on performance. Solved 1,000+ problems. Taught 100+ students. Shipped real products.</p>
+
+      <div class="hero-stats">
+        <div class="stat">
+          <div><span class="stat-n" data-t="1000">0</span><span class="stat-plus">+</span></div>
+          <span class="stat-l">PROBLEMS</span>
+        </div>
+        <div class="stat-div"></div>
+        <div class="stat">
+          <div><span class="stat-n" data-t="120">0</span><span class="stat-plus">+</span></div>
+          <span class="stat-l">STUDENTS</span>
+        </div>
+        <div class="stat-div"></div>
+        <div class="stat">
+          <div><span class="stat-n" data-t="12">0</span><span class="stat-plus">+</span></div>
+          <span class="stat-l">APPS</span>
+        </div>
+        <div class="stat-div"></div>
+        <div class="stat">
+          <div><span class="stat-n" data-t="1.5">0</span><span class="stat-plus">+</span></div>
+          <span class="stat-l">YEARS EXP</span>
+        </div>
+        <div class="stat-div"></div>
+        <div class="stat">
+          <div><span class="stat-n" data-t="80">0</span><span class="stat-plus">+</span></div>
+          <span class="stat-l">GITHUB</span>
+        </div>
+      </div>
+
+      <div class="hero-ctas">
+        <a href="#projects" class="cta-p">View Projects ↓</a>
+        <a href="assets/cv/Salah_Hassan_Junior_Flutter_Dev_CV.pdf" class="cta-s" download id="cvBtn">
+          📥 Download CV
+        </a>
+      </div>
+    </div>
+
+    <div class="photo-col">
+      <div class="photo-wrap">
+        <div class="photo-ring">
+          <img src="assets/images/salah.jpeg" alt="Salah Hassan">
+        </div>
+        <div class="photo-badge">
+          <div class="pb-title">
+            <img src="assets/images/logo/logo.png" alt="logo" class="pb-img" onerror="this.style.display='none'">
+            Salah Hassan
+          </div>
+          <div class="pb-sub">Flutter Dev · Egypt 🇪🇬</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 <script>
   // Theme toggle
@@ -266,6 +611,36 @@
     const t = document.documentElement.getAttribute('data-theme');
     document.documentElement.setAttribute('data-theme', t === 'dark' ? 'light' : 'dark');
   });
+
+  // Typed name effect
+  const nameText = 'Salah Hassan';
+  let ni = 0;
+  const nameEl = document.getElementById('typedName');
+  function typeName() {
+    if (ni < nameText.length) {
+      const ch = nameText[ni];
+      let color = 'var(--text)';
+      if (ni < 5) color = '#00d4ff';
+      if (ch === ' ') color = 'var(--text)';
+      nameEl.innerHTML += `<span style="color:${color};display:inline-block;">${ch === ' ' ? '&nbsp;' : ch}</span>`;
+      ni++;
+      setTimeout(typeName, 110);
+    }
+  }
+  typeName();
+
+  // Typing role effect
+  const phrases = ['Flutter Developer', 'Mobile Dev', 'Coding Instructor', 'Problem Solver'];
+  let pi = 0, ci = 0, del = false;
+  const twEl = document.getElementById('tw');
+  function type() {
+    const cur = phrases[pi];
+    twEl.textContent = del ? cur.slice(0, --ci) : cur.slice(0, ++ci);
+    if (!del && ci === cur.length) { del = true; setTimeout(type, 2000); return; }
+    if (del && ci === 0) { del = false; pi = (pi + 1) % phrases.length; }
+    setTimeout(type, del ? 45 : 80);
+  }
+  type();
 </script>
 
 </body>
