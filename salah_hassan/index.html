@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Salah Hassan — Portfolio</title>
+  <title>Salah Hassan — Flutter Developer</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
   <style>
@@ -15,22 +15,30 @@
     [data-theme="dark"] {
       --bg: #07090f;
       --bg2: #0c101a;
+      --bg3: #111828;
+      --surface: rgba(255,255,255,0.04);
       --text: #dde8f4;
       --text2: #7a9ab8;
+      --text3: #4a6a8a;
       --accent: #00d4ff;
       --accent2: #00ff94;
       --border: rgba(0,212,255,0.18);
       --border2: rgba(255,255,255,0.07);
+      --shadow: 0 24px 64px rgba(0,0,0,.55);
     }
     [data-theme="light"] {
       --bg: #f4f7fb;
       --bg2: #eaf0f8;
+      --bg3: #ffffff;
+      --surface: rgba(0,0,0,0.025);
       --text: #0d1b2e;
       --text2: #4a6280;
+      --text3: #9fb3c8;
       --accent: #0284c7;
       --accent2: #059669;
       --border: rgba(2,100,200,0.18);
       --border2: rgba(0,0,0,0.07);
+      --shadow: 0 24px 64px rgba(0,0,0,.08);
     }
 
     /* Base */
@@ -69,9 +77,196 @@
     [data-theme="light"] body::before {
       opacity: 0.5;
     }
+
+    /* ========== NAVBAR ========== */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 500;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 60px;
+      height: 70px;
+      background: rgba(7,9,15,0.88);
+      backdrop-filter: blur(28px) saturate(200%);
+      border-bottom: 1px solid var(--border);
+      transition: all var(--transition);
+    }
+    [data-theme="light"] nav {
+      background: rgba(244,247,251,0.92);
+    }
+    .nav-logo {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--accent);
+      letter-spacing: .5px;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .nav-logo img {
+      width: 26px;
+      height: 26px;
+      object-fit: contain;
+    }
+    .nav-center {
+      display: flex;
+      gap: 6px;
+    }
+    .nav-center a {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text2);
+      text-decoration: none;
+      padding: 6px 14px;
+      border-radius: 10px;
+      transition: all .3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .nav-center a::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      transition: all .3s ease;
+      transform: translateX(-50%);
+    }
+    .nav-center a:hover::before {
+      width: 60%;
+    }
+    .nav-center a:hover {
+      color: var(--accent);
+      background: rgba(0,212,255,0.08);
+      transform: translateY(-2px);
+    }
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    /* Theme Toggle */
+    .theme-btn {
+      width: 52px;
+      height: 28px;
+      background: var(--bg3);
+      border: 1.5px solid var(--border2);
+      border-radius: 100px;
+      cursor: pointer;
+      position: relative;
+      transition: all .4s;
+      flex-shrink: 0;
+    }
+    .theme-btn::after {
+      content: '🌙';
+      position: absolute;
+      top: 3px;
+      left: 4px;
+      font-size: 18px;
+      transition: all .4s ease;
+    }
+    [data-theme="light"] .theme-btn::after {
+      content: '☀️';
+      transform: translateX(24px);
+    }
+
+    /* WhatsApp Button */
+    .nav-wa {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: #25D366;
+      color: #000;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 7px 14px;
+      border-radius: 100px;
+      text-decoration: none;
+      transition: all .2s;
+      white-space: nowrap;
+    }
+    .nav-wa:hover {
+      background: #128C7E;
+      transform: translateY(-2px);
+    }
+    .nav-wa img {
+      width: 15px;
+      height: 15px;
+    }
+
+    /* Hamburger (mobile) */
+    .ham {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      width: 36px;
+      height: 36px;
+      background: none;
+      border: 1.5px solid var(--border2);
+      border-radius: 10px;
+      cursor: pointer;
+      padding: 8px;
+    }
+    .ham span {
+      display: block;
+      height: 2px;
+      background: var(--text2);
+      border-radius: 2px;
+      transition: all .3s;
+    }
   </style>
 </head>
 <body>
-  <h1 style="text-align: center; padding: 50px;">Portfolio Loading...</h1>
+
+<!-- Progress Bar -->
+<div id="progress" style="position:fixed;top:0;left:0;width:0%;height:3px;background:linear-gradient(90deg,var(--accent),var(--accent2));z-index:9999;"></div>
+
+<!-- Cursor Glow -->
+<div id="cg" style="position:fixed;width:420px;height:420px;background:radial-gradient(circle,rgba(0,212,255,0.12) 0%,transparent 70%);pointer-events:none;border-radius:50%;z-index:9998;"></div>
+
+<!-- Navbar -->
+<nav id="mainNav">
+  <a href="#" class="nav-logo">
+    <img src="assets/images/logo/logo.png" alt="logo" onerror="this.style.display='none'">
+    Salah Hassan
+  </a>
+  <div class="nav-center">
+    <a href="#skills">Skills</a>
+    <a href="#experience">Experience</a>
+    <a href="#projects">Projects</a>
+    <a href="#education">Education</a>
+    <a href="#contact">Contact</a>
+  </div>
+  <div class="nav-right">
+    <button class="theme-btn" id="themeToggle" aria-label="Toggle theme"></button>
+    <a href="https://wa.me/201007066190?text=Hi%20Salah,%20I%20saw%20your%20portfolio!" class="nav-wa" target="_blank">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WA"> Message Me
+    </a>
+    <button class="ham" id="hamBtn" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu" style="display:none;"></div>
+
+<script>
+  // Theme toggle
+  document.getElementById('themeToggle').addEventListener('click', () => {
+    const t = document.documentElement.getAttribute('data-theme');
+    document.documentElement.setAttribute('data-theme', t === 'dark' ? 'light' : 'dark');
+  });
+</script>
+
 </body>
 </html>
