@@ -491,6 +491,100 @@
         order: -1;
         justify-content: center;
       }
+      /* Section Wrapper */
+.sw {
+  position: relative;
+  z-index: 1;
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 88px 60px;
+  scroll-margin-top: 80px;
+}
+
+/* Section Header */
+.sh {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  margin-bottom: 56px;
+}
+.sh-line, .sh-line-r {
+  flex: 1;
+  height: 3px;
+  opacity: .6;
+}
+.sh-line {
+  background: linear-gradient(90deg, var(--accent), transparent);
+}
+.sh-line-r {
+  background: linear-gradient(270deg, var(--accent2), transparent);
+}
+.sh-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: 4px;
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+/* Skills Grid */
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+.skill-card {
+  background: var(--surface);
+  border: 1.5px solid var(--border2);
+  border-radius: 28px;
+  padding: 26px;
+  transition: all var(--transition);
+  backdrop-filter: blur(12px);
+}
+.skill-card:hover {
+  border-color: var(--accent);
+  transform: translateY(-5px);
+  box-shadow: var(--glow);
+}
+.sc-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+.sc-icon {
+  font-size: 24px;
+}
+.sc-name {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text2);
+  letter-spacing: 2px;
+}
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.ch {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text2);
+  background: var(--bg2);
+  border: 1px solid var(--border2);
+  padding: 6px 14px;
+  border-radius: 10px;
+  transition: all .2s;
+}
+.ch:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  transform: translateY(-2px);
+}
       #hero {
         text-align: center;
         padding: 100px 20px 60px;
