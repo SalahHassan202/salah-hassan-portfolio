@@ -787,6 +787,54 @@
 .proj-card:hover .proj-img {
   transform: scale(1.02);
 }
+    .edu-card {
+  background: var(--surface);
+  border: 1.5px solid var(--border2);
+  border-radius: 32px;
+  padding: 44px;
+  display: flex;
+  align-items: flex-start;
+  gap: 32px;
+  flex-wrap: wrap;
+  transition: all var(--transition);
+  backdrop-filter: blur(12px);
+}
+.edu-card:hover {
+  border-color: var(--accent);
+  transform: translateY(-4px);
+}
+.edu-icon {
+  font-size: 56px;
+  flex-shrink: 0;
+}
+.edu-deg {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+.edu-uni {
+  font-size: 14px;
+  color: var(--accent);
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+.edu-detail {
+  font-size: 14px;
+  color: var(--text2);
+  line-height: 1.7;
+}
+.edu-badge {
+  margin-left: auto;
+  background: linear-gradient(135deg, var(--accent2), #00cc77);
+  color: #000;
+  font-weight: 800;
+  font-size: 12px;
+  letter-spacing: 1px;
+  padding: 8px 24px;
+  border-radius: 100px;
+  white-space: nowrap;
+  align-self: flex-start;
+}
   </style>
 </head>
 <body>
