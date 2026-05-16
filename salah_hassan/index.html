@@ -1373,6 +1373,17 @@ if (cvBtn) {
     cvCountEl.textContent = dlCount + ' downloads';
   });
 }
+  const sections = document.querySelectorAll('[id]');
+const navAs = document.querySelectorAll('.nav-center a');
+window.addEventListener('scroll', () => {
+  let cur = '';
+  sections.forEach(s => {
+    if (scrollY >= s.offsetTop - 140) cur = s.id;
+  });
+  navAs.forEach(a => {
+    a.classList.toggle('active', a.getAttribute('href') === '#' + cur);
+  });
+});
 </script>
 <!-- ═══════════════ FOOTER ═══════════════ -->
 <footer>
