@@ -604,7 +604,29 @@
     </div>
   </div>
 </div>
+// Counter animation for stats
+function countUp(el, target) {
+  let cur = 0;
+  const steps = 40;
+  const inc = target / steps;
+  const iv = setInterval(() => {
+    cur = Math.min(Math.round(cur + inc), target);
+    el.textContent = cur;
+    if (cur >= target) clearInterval(iv);
+  }, 20);
+}
 
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      document.querySelectorAll('[data-t]').forEach(el => countUp(el, parseFloat(el.dataset.t)));
+      obs.disconnect();
+    }
+  });
+}, { threshold: .3 });
+
+const stats = document.querySelector('.hero-stats');
+if (stats) obs.observe(stats);
 <script>
   // Theme toggle
   document.getElementById('themeToggle').addEventListener('click', () => {
